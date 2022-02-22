@@ -1,0 +1,60 @@
+﻿@model Company.DomainModels.Products
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Manager/Views/Shared/ManagerLayoutPage1.cshtml";
+}
+
+<h2>@Model.ProductName</h2>
+
+<table class="table">
+    <tr>
+        <th>ProductID</th>
+        <td>@Model.ProductID</td>
+    </tr>
+    <tr>
+        <th>ProductName</th>
+        <td>@Model.ProductName</td>
+    </tr>
+    <tr>
+        <th>AvailabilityStatus</th>
+        <td>@Model.AvailabilityStatus</td>
+    </tr>
+    <tr>
+        <th>Price</th>
+        <td>
+            @if (Model.Price != null)
+            {
+                @Model.Price.Value.ToString("C")
+            }
+
+        </td>
+    </tr>
+    <tr>
+        <th>DateOfPurchase</th>
+        <td>
+            @if (Model.DateOfPurchase != null)
+            {
+                @Model.DateOfPurchase.Value.ToString("d/M/yyy")
+            }
+
+        </td>
+    </tr>
+    <tr>
+        <th>Brand</th>
+        <td>
+            @Model.Brands.BrandName
+        </td>
+    </tr>
+
+    <tr>
+        <th>Category</th>
+        <td>@Model.Categories.CategoryName</td>
+    </tr>
+
+    <tr>
+        <th>Active</th>
+        <td>@Model.Active</td>
+    </tr>
+</table>
+
+<a href="/Manager/products/index">Back to list of products</a>

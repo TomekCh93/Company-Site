@@ -1,0 +1,130 @@
+﻿@model Company.DomainModels.Products
+@using Company_Site.HtmlHelpers
+
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayoutPage1.cshtml";
+}
+
+<h2>Create</h2>
+@using (Html.BeginForm("Create", "Products", new { area = "Admin" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+
+
+
+///@*<form action="/products/create" method="post" enctype="multipart/form-data">*@
+
+{
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.ProductName)
+            @Html.TextBoxFor(model => model.ProductName, new { placeholder = "Product Name", @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ProductName)
+            @*<label for="ProductName">Product Name</label>*@
+            @*<inp/ut type="text" class="form-control" id="ProductName" name="ProductName" placeholder="Product Name">*@
+        </div>
+
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.Price)
+            @Html.TextBoxFor(model => model.Price, new { placeholder = "Price", @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Price)
+            @*<label for="Price">Price</label>
+                <input type="number" class="form-control" id="Price" name="Price" placeholder="Price">*@
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.DateOfPurchase)
+            @Html.TextBoxFor(model => model.DateOfPurchase, new { placeholder = "Date of Purchase", @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DateOfPurchase)
+            @*<label for="DateOfPurchase">Date of purcharse</label>
+                <input type="date" class="form-control" id="DateOfPurchase" name="DateOfPurchase" placeholder="Date of purchase">*@
+        </div>
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.AvailabilityStatus, new { @class = "form-check-label" })
+            @Html.RadioButtonFor(model => model.AvailabilityStatus, "InStock", new { @class = "form-check-input" })InStock
+            @Html.RadioButtonFor(model => model.AvailabilityStatus, "OutOfStock", new { @class = "form-check-input" })Out of Stock
+            @Html.ValidationMessageFor(model => model.AvailabilityStatus)
+
+
+            @*@Html.LabelFor(model => model.AvailabilityStatus)
+                     @Html.DropDownListFor(model => model.AvailabilityStatus, new List<SelectListItem>(){
+                     new SelectListItem(){ Text="In Stock", Value="InStock"},
+                     new SelectListItem(){ Text="Out of Stock", Value="OutOfStock"}
+                }, "Please Select", new { @class = "form-control" })*@
+
+
+            @*<label for="AvailabilityStatus">Availability Status</label>
+                <select class="form-control" id="AvailabilityStatus" name="AvailabilityStatus">
+                    <option value="">Please Select</option>
+                    <option value="InStock">In Stock</option>
+                    <option value="OutOfStock">Out Of Stock</option>
+                </select>*@
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.CategoryID)
+            @Html.DropDownListFor(model => model.CategoryID, new SelectList(ViewBag.Categories, "CategoryID", "CategoryName"), "Please Select", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.CategoryID)
+            @*<label for="CategoryID">Category</label>
+                <select class="form-control" id="CategoryID" name="CategoryID">
+                    <option value="">Please Select</option>
+                    @foreach (var item in ViewBag.categories)
+                    {
+                        <option value="@item.CategoryID">@item.CategoryName</option>
+                    }
+
+                </select>*@
+
+        </div>
+        <div class="form-group col-md-6">
+            @Html.LabelFor(temp => temp.BrandID)
+            @Html.DropDownListFor(temp => temp.BrandID, new SelectList(ViewBag.Brands, "BrandID", "BrandName"), "Please Select", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.BrandID)
+            @*<label for="BrandID">Brand</label>
+                <select class="form-control" id="BrandID" name="BrandID">
+                    <option value="">Please Select</option>
+                    @foreach (var item in ViewBag.brands)
+                    {
+                        <option value="@item.BrandID">@item.BrandName</option>
+                    }
+
+                </select>*@
+        </div>
+    </div>
+
+    <div class="form-group">
+
+        @Html.LabelFor(model => model.Photo)
+        @Html.File("form-control-file")
+        @Html.ValidationMessageFor(model => model.Photo)
+        @*<label for="Image">Image</label>*@
+        @*<input type="file" class="form-control-file" id="Image" name="Photo" />*@
+    </div>
+
+
+
+
+    <div class="form-group">
+        <div class="form-check">
+
+            @Html.CheckBoxFor(model => model.Active, new { @class = "form-check-input", value = "true" })
+            @Html.LabelFor(model => model.Active, new { @class = "form-check-label" })
+            @Html.ValidationMessageFor(model => model.Active)
+
+            @*<input class="form-check-input" type="checkbox" id="Active" name="Active" value="true">
+                <label class="form-check-label" for="Active">
+                    Active
+                </label>*@
+
+        </div>
+    </div>
+
+    @Html.ValidationSummary()
+    <button type="submit" class="btn btn-success">Create</button>
+    <a class="btn btn-danger" href="/admin/products/index">Cancel</a>
+
+}
